@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
-* * jack_bauer - print every minute of a 24 hours
-* * Description: print minutes 00:00 to 23:59
-* */
+* jack_bauer - print every minute of a 24 hours
+* Description: print minutes 00:00 to 23:59
+*/
 
 void jack_bauer(void)
 {
