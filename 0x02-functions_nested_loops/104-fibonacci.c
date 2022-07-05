@@ -18,7 +18,7 @@ printf("1");
 
 for (counter = 2; counter < 93; counter++) /* will still print */
 {
-sum = a +b;
+sum = a+b;
 a = b;
 b = sum;
 printf(", %lu", sum);
@@ -32,8 +32,8 @@ b_tail = b % 1000000000;
 for (; counter < 99; counter++)
 {
 overflow = (a_tail+b_tail) / 1000000000;
-sum_tail = (a_tail +b_tail) - (1000000000 * overflow);
-sum_head = (a_head +b_head) + overflow;
+sum_tail = (a_tail+b_tail)-(1000000000 * overflow);
+sum_head = (a_head+b_head)+overflow;
 
 printf(", %lu%lu", sum_head, sum_tail);
 
