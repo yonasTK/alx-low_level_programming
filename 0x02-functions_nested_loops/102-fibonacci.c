@@ -7,21 +7,22 @@
 
 int main(void)
 {
-int counter;
-int countto = 50;
-long a = 1;
-long b = 2;
+int count;
+	unsigned long fib1 = 0, fib2 = 1, sum;
 
-for (counter = 1; counter <= (countto / 2); counter++)
-{
-printf("%li %li ", a, b);
-a += b;
-b += a;
-}
-if (countto % 2 == 1)
-printf("%li", a);
+	for (count = 0; count < 50; count++)
+	{
+		sum = fib1 + fib2;
+		printf("%lu", sum);
 
-printf("\n");
+		fib1 = fib2;
+		fib2 = sum;
+
+		if (count == 49)
+			printf("\n");
+		else
+			printf(", ");
+	}
 
 return (0);
 }
