@@ -13,3 +13,4 @@ int x;
 
 x = a * b;
 return (x);
+}
