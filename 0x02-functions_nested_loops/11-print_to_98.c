@@ -2,9 +2,9 @@
 #include <stdio.h>
 
 /**
-*  * print_to_98 - print numbers n to 98
-*   * @n: integer argument
-*    */
+* print_to_98 - print numbers n to 98
+* @n: integer argument
+* /
 
 void print_to_98(int n)
 {
