@@ -1,6 +1,6 @@
 #include "main.h"
 /**
-* print_number - prints # using _putchar function
+* print_number - prints using _putchar function
 * @n: the integer to print
 * Return: void
 */
