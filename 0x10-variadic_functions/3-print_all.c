@@ -1,83 +1,85 @@
+#include <stdarg.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include "variadic_functions.h"
-/**
- * print_i - prints int
- * @list: arguement of list
- * @s: seperator
- * Return: none
- */
-void print_i(va_list list, char *s)
-{
-	printf("%s%d", s, va_arg(list, int));
-}
-/**
- * print_c - prints char
- * @list: arguement char
- * @sep: seperator
- */
-void print_c(va_list list, char *sep)
-{
-	printf("%s%c", sep, va_arg(list, int));
-}
-/**
- * print_s - prints string
- * @sep: seperator
- * @list: list to print
- * Return: none
- */
-void print_s(va_list list, char *sep)
-{
-	char *s;
 
-	s = va_arg(list, char *);
-	if (s == NULL)
-		s = "(nil)";
-	printf("%s%s", sep, s);
-}
 /**
- * print_f - prints floats
- * @sep: float to print
- * @list: next arguement of list to print
- * Return: none
- */
-void print_f(va_list list, char *sep)
+*print_char - prints char
+*@valist: valist
+*/
+void print_char(va_list valist)
 {
-	printf("%s%f", sep, va_arg(list, double));
+printf("%c", va_arg(valist, int));
 }
+
 /**
- * print_all - prints out all stuff
- * @format: format is list of types of arguements
- */
+*print_int - prints int
+*@valist: valist
+*/
+void print_int(va_list valist)
+{
+printf("%d", va_arg(valist, int));
+}
+
+/**
+*print_float - prints float
+*@valist: valist
+*/
+void print_float(va_list valist)
+{
+printf("%f", va_arg(valist, double));
+}
+
+/**
+*print_string - prints string
+*@valist: valist
+*/
+void print_string(va_list valist)
+{
+char *s;
+
+s = va_arg(valist, char *);
+
+if (s == NULL)
+{
+printf("(nil)");
+return;
+}
+printf("%s", s);
+}
+
+/**
+*print_all - print varying input of ints, chars, floats, and strings
+*@format: an array of chars signifying which data type to print
+*/
 void print_all(const char * const format, ...)
 {
-	va_list list;
-	char *sep;
-	int i, j;
-	fm_t fm[] = {
-		{"c", print_c},
-		{"i", print_i},
-		{"f", print_f},
-		{"s", print_s},
-		{NULL, NULL}
-	};
-	va_start(list, format);
-	i = 0;
-	sep = "";
-	while (format != NULL && format[i] != '\0')
-	{
-		j = 0;
-		while (j < 4)
-		{
-			if (format[i] == *(fm[j]).fm)
-			{
-				fm[j].p(list, sep);
-				sep = ", ";
-			}
-			j++;
-		}
-		i++;
-	}
-	printf("\n");
-	va_end(list);
+char *separator = "";
+int i, j = 0;
+va_list valist;
+
+datatype choice[] = { {'c', print_char},
+{'i', print_int},
+{'f', print_float},
+{'s', print_string},
+{'\0', NULL} };
+
+/* iterate format; if datatype matched, access function via struct */
+va_start(valist, format);
+while (format != NULL && format[j] != '\0')
+{
+i = 0;
+while (choice[i].letter != '\0')
+{
+if (choice[i].letter == format[j])
+{
+printf("%s", separator);
+choice[i].func(valist); /*access va_arg later*/
+separator = ", ";
+}
+i++;
+}
+j++;
+}
+va_end(valist);
+printf("\n");
 }
